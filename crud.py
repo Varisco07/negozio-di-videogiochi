@@ -18,12 +18,12 @@ def scrivi_file():
 
 def stampa_catalogo(catalogo):
     try:
-        print(f"{'ID'} | {'TITOLO':<39} |")
-        print("-" * 46)
+        print(f"{'ID':<3} | {'TITOLO':<40} |")
+        print("-" * 48)
         count = 0
         while count < len(catalogo):
-            print(f"{count} | {catalogo[count]['titolo']:<40} |")
-            print("-" * 46)
+            print(f"{count:<3} | {catalogo[count]['titolo']:<40} |")
+            print("-" * 48)
             count += 1
     except Exception as err:
         print("Errore durante la stampa del catalogo: ", err)
