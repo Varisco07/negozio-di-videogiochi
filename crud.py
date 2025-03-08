@@ -1,6 +1,6 @@
 import os
-
-
+ 
+ 
 catalogo_giochi = [
     {
         "titolo": "The Legend of Zelda: Breath of the Wild",
@@ -21,29 +21,30 @@ catalogo_giochi = [
         "genere": "Sport"
     }
 ]
-
-
+ 
+ 
 def stampa_catalogo(catalogo):
     try:
-        for i, gioco in enumerate(catalogo):
-            print(f"{i}.")
-            print(f"TITOLO: {gioco['titolo']}")
-            print(f"SVILUPPATORE: {gioco['sviluppatore']}")
-            print(f"ANNO: {gioco['anno']}")
-            print(f"GENERE: {gioco['genere']}")
-            print()
+        print(f"{'ID'} | {'TITOLO':<39} |")
+        print("-" * 46)
+        count = 0
+        while count < len(catalogo):
+            print(f"{count} | {catalogo[count]['titolo']:<40} |")
+            print("-" * 46)
+            count += 1
     except Exception as err:
         print("Errore durante la stampa del catalogo: ", err)
-
-
+ 
+ 
+ 
 def aggiungi_gioco(catalogo):
     try:
-        titolo = input("Inserisci il titolo: ")
         count = 0
         titolo = input("Inserisci il titolo: ")
         while count < len(catalogo):
             if catalogo[count]["titolo"] == titolo:
-                return print("Errore: Gioco già presente.")
+                print("Errore: Gioco già presente.")
+                return
             count += 1
         sviluppatore = input("Inserisci il nome dello sviluppatore: ")
         anno = int(input("Inserisci l'anno di uscita: "))
@@ -57,26 +58,20 @@ def aggiungi_gioco(catalogo):
         print("Gioco aggiunto con successo")
     except Exception as err:
         print("Errore: ", err)
-    finally:
-        print("Operazione di aggiunta gioco completata.")
 
 
+ 
+ 
 def rimuovi_gioco(catalogo):
     try:
         stampa_catalogo(catalogo)
         numero = int(input("Inserisci il numero del gioco da eliminare: "))
         catalogo.pop(numero)
         print("Gioco rimosso con successo")
-    except IndexError:
-        print("Errore: Numero gioco non valido.")
-    except ValueError:
-        print("Errore: Input non valido.")
     except Exception as err:
         print("Errore: ", err)
-    finally:
-        print("Operazione di rimozione gioco completata.")
-
-
+ 
+ 
 def modifica_gioco(catalogo):
     try:
         stampa_catalogo(catalogo)
@@ -85,7 +80,7 @@ def modifica_gioco(catalogo):
         sviluppatore = input("Inserisci il nuovo sviluppatore: ")
         anno = int(input("Inserisci il nuovo anno di uscita: "))
         genere = input("Inserisci il nuovo genere: ")
-
+ 
         catalogo[numero] = {
             "titolo": titolo,
             "sviluppatore": sviluppatore,
@@ -93,16 +88,11 @@ def modifica_gioco(catalogo):
             "genere": genere
         }
         print("Gioco modificato con successo")
-    except IndexError:
-        print("Errore: Numero gioco non valido.")
-    except ValueError:
-        print("Errore: Anno non valido.")
     except Exception as err:
         print("Errore: ", err)
-    finally:
-        print("Operazione di modifica gioco completata.")
 
-
+ 
+ 
 def giochi_per_sviluppatore(catalogo, sviluppatore):
     try:
         print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
@@ -113,8 +103,8 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
             i += 1
     except Exception as err:
         print("Errore durante la ricerca dei giochi per sviluppatore: ", err)
-
-
+ 
+ 
 def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
     try:
         print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
@@ -125,10 +115,8 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
             i += 1
     except Exception as err:
         print("Errore durante la ricerca dei giochi per periodo: ", err)
-    finally:
-        print("Operazione di ricerca giochi per periodo completata.")
-
-
+ 
+ 
 def menu():
     while True:
         try:
@@ -138,7 +126,7 @@ def menu():
             print(" | | |_ |   / /\\ \\   | |\\/| | |  __|    \\___  |    | |    | |  | |  |  ___| ")
             print(" | |__| |  / ____ \\  | |  | | | |____   ____) |    | |    | |__| |  | |     ")
             print("  \\_____| /_/    \\_\\ |_|  |_| |______| |______|    |_|    | ____ |  |_|   ")
-
+ 
             scelta = int(input("0. per terminare\n"
                                "1. per vedere un gioco\n"
                                "2. per vedere il catalogo\n"
@@ -153,9 +141,18 @@ def menu():
                 try:
                     stampa_catalogo(catalogo_giochi)
                     numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
-                    print(catalogo_giochi[numero])
+                    print(f'TITOLO       | {catalogo_giochi[numero]["titolo"]:<30}|')
+                    print("-" * 46)
+                    print(f'SVILUPPATORE | {catalogo_giochi[numero]["sviluppatore"]:<30}|')
+                    print("-" * 46)
+                    print(f'ANNO         | {catalogo_giochi[numero]["anno"]:<30}|')
+                    print("-" * 46)
+                    print(f'GENERE       | {catalogo_giochi[numero]["genere"]:<30}|')
+                    print("-" * 46)
                 except Exception as err:
                     print("Errore: ", err)
+                finally:
+                    print("Operazione di visualizzazione gioco completata.")
             elif scelta == 2:
                 stampa_catalogo(catalogo_giochi)
             elif scelta == 3:
@@ -168,19 +165,15 @@ def menu():
                 sviluppatore = input("Inserisci il nome dello sviluppatore: ")
                 giochi_per_sviluppatore(catalogo_giochi, sviluppatore)
             elif scelta == 7:
-                try:
-                    anno_inizio = int(input("Inserisci l'anno di inizio: "))
-                    anno_fine = int(input("Inserisci l'anno di fine: "))
-                    giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
+                anno_inizio = int(input("Inserisci l'anno di inizio: "))
+                anno_fine = int(input("Inserisci l'anno di fine: "))
+                giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
             else:
                 print("Scelta non valida")
-            input("Premi un tasto per continuare...")
-            os.system("cls")  
         except Exception as err:
             print("Errore: ", err)
-            input("Premi un tasto per continuare...")
-            os.system("clear")
         finally:
-            print("Operazione del menu completata.")
-
-
+            input("Premi un tasto per continuare...")
+            os.system("cls")
+            
+menu()
