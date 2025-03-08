@@ -1,28 +1,21 @@
 import os
+import json
  
  
-catalogo_giochi = [
-    {
-        "titolo": "The Legend of Zelda: Breath of the Wild",
-        "sviluppatore": "Nintendo",
-        "anno": 2017,
-        "genere": "Action-Adventure"
-    },
-    {
-        "titolo": "God of War",
-        "sviluppatore": "Santa Monica Studio",
-        "anno": 2018,
-        "genere": "Action"
-    },
-    {
-        "titolo": "FC 25",
-        "sviluppatore": "Electronic Arts",
-        "anno": 2024,
-        "genere": "Sport"
-    }
-]
+catalogo_giochi = []
+
+def leggi_file():
+        global catalogo_giochi
+        with open("./giochi.json", "r") as file:
+            catalogo_giochi = json.load(file)
+
  
- 
+def scrivi_file():
+        with open("./giochi.json", "w") as file:
+            json.dump(catalogo_giochi, file)
+
+
+
 def stampa_catalogo(catalogo):
     try:
         print(f"{'ID'} | {'TITOLO':<39} |")
@@ -116,8 +109,9 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
     except Exception as err:
         print("Errore durante la ricerca dei giochi per periodo: ", err)
  
- 
+
 def menu():
+    leggi_file()
     while True:
         try:
             print("\033[34m   _____              __  __   ______    _____   _______    ____     _____  \033[0m")
@@ -143,6 +137,8 @@ def menu():
             print("\033[34m| \033[36m 6 | giochi per sviluppatore\033[34m |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
             print("\033[34m| \033[36m 7 | giochi per periodo    \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 8 | scrivi file           \033[34m  |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
            
             scelta = int(input("\033[36m--> \033[0m"))
@@ -183,6 +179,9 @@ def menu():
                 anno_inizio = int(input("Inserisci l'anno di inizio: "))
                 anno_fine = int(input("Inserisci l'anno di fine: "))
                 giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
+            elif scelta == 8:
+                scrivi_file()
+                print("File scritto con successo")
             else:
                 print("Scelta non valida")
         except Exception as err:
@@ -191,4 +190,5 @@ def menu():
             input("Premi un tasto per continuare...")
             os.system("cls")
            
+
 menu()
