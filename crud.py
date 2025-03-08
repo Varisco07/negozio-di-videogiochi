@@ -58,8 +58,8 @@ def aggiungi_gioco(catalogo):
         print("Gioco aggiunto con successo")
     except Exception as err:
         print("Errore: ", err)
-
-
+ 
+ 
  
  
 def rimuovi_gioco(catalogo):
@@ -90,7 +90,7 @@ def modifica_gioco(catalogo):
         print("Gioco modificato con successo")
     except Exception as err:
         print("Errore: ", err)
-
+ 
  
  
 def giochi_per_sviluppatore(catalogo, sviluppatore):
@@ -120,27 +120,42 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
 def menu():
     while True:
         try:
-            print("   _____              __  __   ______    _____   _______    ____     _____  ")
-            print("  / ____|     /\\     |  \\/  | |  ____|  / ____| |__   __| |  __  |  |  __ | ")
-            print(" | |  __     /  \\    | \\  / | | |__    | (____     | |    | |  | |  | |__| |")
-            print(" | | |_ |   / /\\ \\   | |\\/| | |  __|    \\___  |    | |    | |  | |  |  ___| ")
-            print(" | |__| |  / ____ \\  | |  | | | |____   ____) |    | |    | |__| |  | |     ")
-            print("  \\_____| /_/    \\_\\ |_|  |_| |______| |______|    |_|    | ____ |  |_|   ")
+            print("\033[34m   _____              __  __   ______    _____   _______    ____     _____  \033[0m")
+            print("\033[34m  / ____|     /\\     |  \\/  | |  ____|  / ____| |__   __| |  __  |  |  __ | \033[0m")
+            print("\033[34m | |  __     /  \\    | \\  / | | |__    | (____     | |    | |  | |  | |__| |\033[0m")
+            print("\033[34m | | |_ |   / /\\ \\   | |\\/| | |  __|    \\___  |    | |    | |  | |  |  ___| \033[0m")
+            print("\033[34m | |__| |  / ____ \\  | |  | | | |____   ____) |    | |    | |__| |  | |     \033[0m")
+            print("\033[34m  \\_____| /_/    \\_\\ |_|  |_| |______| |______|    |_|    | ____ |  |_|   \033[0m")
+           
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 0 | per terminare         \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 1 | per vedere un gioco   \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 2 | per vedere il catalogo\033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 3 | per aggiungere un gioco\033[34m |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 4 | rimuovere un gioco    \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 5 | modificare un gioco   \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 6 | giochi per sviluppatore\033[34m |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 7 | giochi per periodo    \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+           
+            scelta = int(input("\033[36m--> \033[0m"))
  
-            scelta = int(input("0. per terminare\n"
-                               "1. per vedere un gioco\n"
-                               "2. per vedere il catalogo\n"
-                               "3. per aggiungere un gioco\n"
-                               "4. rimuovere un gioco\n"
-                               "5. modificare un gioco\n"
-                               "6. giochi per sviluppatore\n"
-                               "7. giochi per periodo\n--> "))
             if scelta == 0:
                 break
             elif scelta == 1:
                 try:
                     stampa_catalogo(catalogo_giochi)
                     numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
+                    print()
+                    print()
+                    print("-" * 46)
                     print(f'TITOLO       | {catalogo_giochi[numero]["titolo"]:<30}|')
                     print("-" * 46)
                     print(f'SVILUPPATORE | {catalogo_giochi[numero]["sviluppatore"]:<30}|')
@@ -175,5 +190,5 @@ def menu():
         finally:
             input("Premi un tasto per continuare...")
             os.system("cls")
-            
+           
 menu()
