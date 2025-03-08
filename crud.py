@@ -34,13 +34,17 @@ def stampa_catalogo(catalogo):
             print()
     except Exception as err:
         print("Errore durante la stampa del catalogo: ", err)
-    finally:
-        print("Operazione di stampa del catalogo completata.")
 
 
 def aggiungi_gioco(catalogo):
     try:
         titolo = input("Inserisci il titolo: ")
+        count = 0
+        titolo = input("Inserisci il titolo: ")
+        while count < len(catalogo):
+            if catalogo[count]["titolo"] == titolo:
+                return print("Errore: Gioco già presente.")
+            count += 1
         sviluppatore = input("Inserisci il nome dello sviluppatore: ")
         anno = int(input("Inserisci l'anno di uscita: "))
         genere = input("Inserisci il genere: ")
@@ -51,8 +55,6 @@ def aggiungi_gioco(catalogo):
             "genere": genere
         })
         print("Gioco aggiunto con successo")
-    except ValueError:
-        print("Errore: Anno non valido.")
     except Exception as err:
         print("Errore: ", err)
     finally:
@@ -111,8 +113,6 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
             i += 1
     except Exception as err:
         print("Errore durante la ricerca dei giochi per sviluppatore: ", err)
-    finally:
-        print("Operazione di ricerca giochi per sviluppatore completata.")
 
 
 def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
@@ -154,14 +154,8 @@ def menu():
                     stampa_catalogo(catalogo_giochi)
                     numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
                     print(catalogo_giochi[numero])
-                except IndexError:
-                    print("Errore: Numero gioco non valido.")
-                except ValueError:
-                    print("Errore: Input non valido.")
                 except Exception as err:
                     print("Errore: ", err)
-                finally:
-                    print("Operazione di visualizzazione gioco completata.")
             elif scelta == 2:
                 stampa_catalogo(catalogo_giochi)
             elif scelta == 3:
@@ -178,18 +172,10 @@ def menu():
                     anno_inizio = int(input("Inserisci l'anno di inizio: "))
                     anno_fine = int(input("Inserisci l'anno di fine: "))
                     giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
-                except ValueError:
-                    print("Errore: Anno non valido.")
-                except Exception as err:
-                    print("Errore: ", err)
-                finally:
-                    print("Operazione di visualizzazione giochi per periodo completata.")
             else:
                 print("Scelta non valida")
             input("Premi un tasto per continuare...")
             os.system("cls")  
-        except ValueError:
-            print("Errore: Input non valido.")
         except Exception as err:
             print("Errore: ", err)
             input("Premi un tasto per continuare...")
