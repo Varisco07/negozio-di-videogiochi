@@ -47,7 +47,7 @@ def aggiungi_gioco(catalogo):
             "titolo": titolo,
             "sviluppatore": sviluppatore,
             "anno": anno,
-            "genere": genere
+            "genere": genere,
         })
         print("\033[32mGioco aggiunto con successo\033[0m")
     except Exception as err:
@@ -139,7 +139,7 @@ def menu():
             print("\033[34m+------------------------------+\033[0m")
             print("\033[34m| \033[36m 7 | giochi per periodo    \033[34m  |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 8 | scrivi file           \033[34m  |\033[0m")
+            print("\033[34m| \033[36m 8 | aggiorna file         \033[34m  |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
            
             scelta = int(input("\033[36m--> \033[0m"))
