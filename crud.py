@@ -16,18 +16,40 @@ def scrivi_file():
             json.dump(catalogo_giochi, file)
  
  
- 
 def stampa_catalogo(catalogo):
     try:
-        print(f"{'ID':<3} | {'TITOLO':<40} |")
-        print("-" * 48)
+        print("-" * 49)
+        print(f"| {'ID':<2} | {'TITOLO':<40} |")
+        print("-" * 49)
         count = 0
         while count < len(catalogo):
-            print(f"{count:<3} | {catalogo[count]['titolo']:<40} |")
-            print("-" * 48)
+            print(f"| {count:<2} | {catalogo[count]['titolo']:<40} |")
+            print("-" * 49)
             count += 1
     except Exception as err:
         print("\033[31mErrore durante la stampa del catalogo: \033[0m", err)
+ 
+ 
+def stampa_gioco(gioco):
+    try:
+        stampa_catalogo(catalogo_giochi)
+        numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
+        print()
+        print()
+        print("-" * 46)
+        print(f'TITOLO       | {catalogo_giochi[numero]["titolo"]:<30}|')
+        print("-" * 46)
+        print(f'SVILUPPATORE | {catalogo_giochi[numero]["sviluppatore"]:<30}|')
+        print("-" * 46)
+        print(f'ANNO         | {catalogo_giochi[numero]["anno"]:<30}|')
+        print("-" * 46)
+        print(f'GENERE       | {catalogo_giochi[numero]["genere"]:<30}|')
+        print("-" * 46)
+        print(f'COSTO        | {catalogo_giochi[numero]["costo"]:<30}|')
+        print("-" * 46)
+        print("\033[32mOperazione di visualizzazione gioco completata.\033[0m")
+    except Exception as err:
+        print("\033[31mErrore: \033[0m", err)
  
  
  
@@ -47,7 +69,7 @@ def aggiungi_gioco(catalogo):
             "titolo": titolo,
             "sviluppatore": sviluppatore,
             "anno": anno,
-            "genere": genere
+            "genere": genere,
         })
         print("\033[32mGioco aggiunto con successo\033[0m")
     except Exception as err:
@@ -69,17 +91,19 @@ def rimuovi_gioco(catalogo):
 def modifica_gioco(catalogo):
     try:
         stampa_catalogo(catalogo)
-        numero = int(input("Inserisci il numero del gioco da modificare: "))
+        scelta = int(input("Inserisci il numero del gioco da modificare: "))
         titolo = input("Inserisci il nuovo titolo: ")
         sviluppatore = input("Inserisci il nuovo sviluppatore: ")
         anno = int(input("Inserisci il nuovo anno di uscita: "))
         genere = input("Inserisci il nuovo genere: ")
+        costo = input("Inserisci il nuovo costo: ")
  
-        catalogo[numero] = {
+        catalogo[scelta] = {
             "titolo": titolo,
             "sviluppatore": sviluppatore,
             "anno": anno,
-            "genere": genere
+            "genere": genere,
+            "costo": costo
         }
         print("\033[32mGioco modificato con successo\033[0m")
     except Exception as err:
@@ -111,6 +135,27 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
         print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
  
  
+def costo_gioco(catalogo, costo_min, costo_max):
+        try:
+            print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
+            i = 0
+            while i < len(catalogo):
+                if costo_min <= catalogo[i]["anno"] <= costo_max:
+                    print(catalogo[i])
+                i += 1
+        except Exception as err:
+            print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
+ 
+def giochi_per_genere(catalogo, genere):
+    try:
+        i = 0
+        while i < len(catalogo):
+            if catalogo[i]["genere"].lower() == genere.lower():
+                print(catalogo[i])
+            i += 1
+    except Exception as err:
+        print("\033[31mErrore durante la ricerca dei giochi per genere: \033[0m", err)
+ 
 def menu():
     leggi_file()
     while True:
@@ -139,7 +184,11 @@ def menu():
             print("\033[34m+------------------------------+\033[0m")
             print("\033[34m| \033[36m 7 | giochi per periodo    \033[34m  |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 8 | scrivi file           \033[34m  |\033[0m")
+            print("\033[34m| \033[36m 8 | giochi per costo      \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 8 | giochi per genere     \033[34m  |\033[0m")
+            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m| \033[36m 10 | aggiorna file        \033[34m  |\033[0m")
             print("\033[34m+------------------------------+\033[0m")
            
             scelta = int(input("\033[36m--> \033[0m"))
@@ -147,24 +196,7 @@ def menu():
             if scelta == 0:
                 break
             elif scelta == 1:
-                try:
-                    stampa_catalogo(catalogo_giochi)
-                    numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
-                    print()
-                    print()
-                    print("-" * 46)
-                    print(f'TITOLO       | {catalogo_giochi[numero]["titolo"]:<30}|')
-                    print("-" * 46)
-                    print(f'SVILUPPATORE | {catalogo_giochi[numero]["sviluppatore"]:<30}|')
-                    print("-" * 46)
-                    print(f'ANNO         | {catalogo_giochi[numero]["anno"]:<30}|')
-                    print("-" * 46)
-                    print(f'GENERE       | {catalogo_giochi[numero]["genere"]:<30}|')
-                    print("-" * 46)
-                except Exception as err:
-                    print("\033[31mErrore: \033[0m", err)
-                finally:
-                    print("\033[32mOperazione di visualizzazione gioco completata.\033[0m")
+                stampa_gioco(catalogo_giochi)
             elif scelta == 2:
                 stampa_catalogo(catalogo_giochi)
             elif scelta == 3:
@@ -181,6 +213,13 @@ def menu():
                 anno_fine = int(input("Inserisci l'anno di fine: "))
                 giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
             elif scelta == 8:
+                costo_min = int(input("Insersci il costo minimo del gioco: "))
+                costo_max = int(input("Inserisci il costo massimo del gioco: "))
+                costo_gioco(catalogo_giochi, costo_min, costo_max)
+            elif scelta == 9:
+                genere = input("Inserisci il genere di giochi che vuoi visualizzare: ")
+                giochi_per_genere(catalogo_giochi, genere)
+            elif scelta == 10:
                 scrivi_file()
                 print("File scritto con successo")
             else:
@@ -188,8 +227,7 @@ def menu():
         except Exception as err:
             print("\033[31mErrore: \033[0m", err)
         finally:
-            time.sleep(2)
+            time.sleep(3)
             os.system("cls")
            
- 
 menu()
