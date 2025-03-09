@@ -19,12 +19,13 @@ def scrivi_file():
  
 def stampa_catalogo(catalogo):
     try:
-        print(f"{'ID':<3} | {'TITOLO':<40} |")
-        print("-" * 48)
+        print("-" * 49)
+        print(f"| {'ID':<2} | {'TITOLO':<40} |")
+        print("-" * 49)
         count = 0
         while count < len(catalogo):
-            print(f"{count:<3} | {catalogo[count]['titolo']:<40} |")
-            print("-" * 48)
+            print(f"| {count:<2} | {catalogo[count]['titolo']:<40} |")
+            print("-" * 49)
             count += 1
     except Exception as err:
         print("\033[31mErrore durante la stampa del catalogo: \033[0m", err)
@@ -191,5 +192,4 @@ def menu():
             time.sleep(2)
             os.system("cls")
            
- 
 menu()
