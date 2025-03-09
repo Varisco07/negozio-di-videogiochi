@@ -1,21 +1,22 @@
 import os
 import json
+import time
  
  
 catalogo_giochi = []
-
+ 
 def leggi_file():
         global catalogo_giochi
         with open("./giochi.json", "r") as file:
             catalogo_giochi = json.load(file)
-
+ 
  
 def scrivi_file():
         with open("./giochi.json", "w") as file:
             json.dump(catalogo_giochi, file)
-
-
-
+ 
+ 
+ 
 def stampa_catalogo(catalogo):
     try:
         print(f"{'ID':<3} | {'TITOLO':<40} |")
@@ -26,7 +27,7 @@ def stampa_catalogo(catalogo):
             print("-" * 48)
             count += 1
     except Exception as err:
-        print("Errore durante la stampa del catalogo: ", err)
+        print("\033[31mErrore durante la stampa del catalogo: \033[0m", err)
  
  
  
@@ -48,9 +49,9 @@ def aggiungi_gioco(catalogo):
             "anno": anno,
             "genere": genere
         })
-        print("Gioco aggiunto con successo")
+        print("\033[32mGioco aggiunto con successo\033[0m")
     except Exception as err:
-        print("Errore: ", err)
+        print("\033[31mErrore: \033[0m", err)
  
  
  
@@ -60,9 +61,9 @@ def rimuovi_gioco(catalogo):
         stampa_catalogo(catalogo)
         numero = int(input("Inserisci il numero del gioco da eliminare: "))
         catalogo.pop(numero)
-        print("Gioco rimosso con successo")
+        print("\033[32mGioco rimosso con successo\033[0m")
     except Exception as err:
-        print("Errore: ", err)
+        print("\033[31mErrore: \033[0m", err)
  
  
 def modifica_gioco(catalogo):
@@ -80,9 +81,9 @@ def modifica_gioco(catalogo):
             "anno": anno,
             "genere": genere
         }
-        print("Gioco modificato con successo")
+        print("\033[32mGioco modificato con successo\033[0m")
     except Exception as err:
-        print("Errore: ", err)
+        print("\033[31mErrore: \033[0m", err)
  
  
  
@@ -95,7 +96,7 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
                 print(catalogo[i])
             i += 1
     except Exception as err:
-        print("Errore durante la ricerca dei giochi per sviluppatore: ", err)
+        print("\033[31mErrore durante la ricerca dei giochi per sviluppatore: \033[0m", err)
  
  
 def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
@@ -107,9 +108,9 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
                 print(catalogo[i])
             i += 1
     except Exception as err:
-        print("Errore durante la ricerca dei giochi per periodo: ", err)
+        print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
  
-
+ 
 def menu():
     leggi_file()
     while True:
@@ -161,9 +162,9 @@ def menu():
                     print(f'GENERE       | {catalogo_giochi[numero]["genere"]:<30}|')
                     print("-" * 46)
                 except Exception as err:
-                    print("Errore: ", err)
+                    print("\033[31mErrore: \033[0m", err)
                 finally:
-                    print("Operazione di visualizzazione gioco completata.")
+                    print("\033[32mOperazione di visualizzazione gioco completata.\033[0m")
             elif scelta == 2:
                 stampa_catalogo(catalogo_giochi)
             elif scelta == 3:
@@ -183,12 +184,12 @@ def menu():
                 scrivi_file()
                 print("File scritto con successo")
             else:
-                print("Scelta non valida")
+                print("\033[31mScelta non valida\033[0m")
         except Exception as err:
-            print("Errore: ", err)
+            print("\033[31mErrore: \033[0m", err)
         finally:
-            input("Premi un tasto per continuare...")
+            time.sleep(2)
             os.system("cls")
            
-
+ 
 menu()
