@@ -1,6 +1,5 @@
 import os
 import json
-import time
  
  
 catalogo_giochi = []
@@ -115,9 +114,11 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
     try:
         print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
         i = 0
+        print(f"| {'ID':<2} | {'SVILUPPATORE':<40} |")
         while i < len(catalogo):
             if catalogo[i]["sviluppatore"].lower() == sviluppatore.lower():
-                print(catalogo[i])
+                print(f"| {i:<2} | {catalogo[i]['sviluppatore']:<40} |")
+                print("-" * 49)
             i += 1
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per sviluppatore: \033[0m", err)
@@ -127,9 +128,13 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
     try:
         print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
         i = 0
+        print("-" * 57)
+        print(f"| {'TITOLO':<40} | {'ANNO':<10} |")
+        print("-" * 57)
         while i < len(catalogo):
             if anno_inizio <= catalogo[i]["anno"] <= anno_fine:
-                print(catalogo[i])
+                print(f"| {catalogo[i]['titolo']:<40} | {catalogo[i]['anno']:<10} |")
+                print("-" * 57)
             i += 1
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
@@ -139,9 +144,13 @@ def costo_gioco(catalogo, costo_min, costo_max):
         try:
             print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
             i = 0
+            print("-" * 57)
+            print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
+            print("-" * 57)
             while i < len(catalogo):
-                if costo_min <= catalogo[i]["anno"] <= costo_max:
-                    print(catalogo[i])
+                if costo_min <= catalogo[i]["costo"] <= costo_max:
+                    print(f"| {catalogo[i]['titolo']:<40} | {catalogo[i]['costo']:<10} |")
+                    print("-" * 57)
                 i += 1
         except Exception as err:
             print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
@@ -149,9 +158,13 @@ def costo_gioco(catalogo, costo_min, costo_max):
 def giochi_per_genere(catalogo, genere):
     try:
         i = 0
+        print("-" * 49)
+        print(f"| {'ID':<2} | {'TITOLO':<40} |")
+        print("-" * 49)
         while i < len(catalogo):
             if catalogo[i]["genere"].lower() == genere.lower():
-                print(catalogo[i])
+                print(f"| {i:<2} | {catalogo[i]['titolo']:<40} |")
+                print("-" * 49)
             i += 1
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per genere: \033[0m", err)
@@ -167,29 +180,29 @@ def menu():
             print("\033[34m | |__| |  / ____ \\  | |  | | | |____   ____) |    | |    | |__| |  | |     \033[0m")
             print("\033[34m  \\_____| /_/    \\_\\ |_|  |_| |______| |______|    |_|    | ____ |  |_|   \033[0m")
            
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 0 | per terminare         \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 1 | per vedere un gioco   \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 2 | per vedere il catalogo\033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 3 | per aggiungere un gioco\033[34m |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 4 | rimuovere un gioco    \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 5 | modificare un gioco   \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 6 | giochi per sviluppatore\033[34m |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 7 | giochi per periodo    \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 8 | giochi per costo      \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 8 | giochi per genere     \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
-            print("\033[34m| \033[36m 10 | aggiorna file        \033[34m  |\033[0m")
-            print("\033[34m+------------------------------+\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 0  | per terminare         \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 1  | per vedere un gioco   \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 2  | per vedere il catalogo\033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 3  | per aggiungere un gioco\033[34m |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 4  | rimuovere un gioco    \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 5  | modificare un gioco   \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 6  | giochi per sviluppatore\033[34m |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 7  | giochi per periodo    \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 8  | giochi per costo      \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 9  | giochi per genere     \033[34m  |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 10 | aggiorna file        \033[34m   |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
            
             scelta = int(input("\033[36m--> \033[0m"))
  
@@ -227,7 +240,7 @@ def menu():
         except Exception as err:
             print("\033[31mErrore: \033[0m", err)
         finally:
-            time.sleep(3)
+            input("premere un tasto per continuare...")
             os.system("cls")
            
 menu()
