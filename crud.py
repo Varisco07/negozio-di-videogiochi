@@ -116,7 +116,7 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
         trovato = False
         while count < len(catalogo):
             if catalogo[count]["sviluppatore"].lower() == sviluppatore.lower():
-                print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
+                print(f"Ecco l'elenco dei giochi svfiluppati da: {sviluppatore}")
                 print("-" * 49)
                 print(f"| {'ID':<2} | {'TITOLO':<40} |")
                 print("-" * 49)
@@ -273,7 +273,7 @@ def menu():
                 scrivi_file()
                 print("\033[32mFile scritto con successo\033[0m")
             else:
-                print("\033[33mScelta non valida\033[0m")
+                print("\033[31mScelta non valida\033[0m")
         except Exception as err:
             print("\033[31mErrore: \033[0m", err)
         finally:
