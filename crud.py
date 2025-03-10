@@ -109,14 +109,16 @@ def modifica_gioco(catalogo):
  
 def giochi_per_sviluppatore(catalogo, sviluppatore):
     try:
-        print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
         i = 0
         count = 0
+        trovato = False
         while count < len(catalogo):
             if catalogo[count]["sviluppatore"].lower() == sviluppatore.lower():
+                print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
                 print("-" * 49)
                 print(f"| {'ID':<2} | {'TITOLO':<40} |")
                 print("-" * 49)
+                trovato = True
                 break
             count+=1
         while i < len(catalogo):
@@ -124,19 +126,23 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
                 print(f"| {i:<2} | {catalogo[i]['titolo']:<40} |")
                 print("-" * 49)
             i += 1
+        if trovato == False:
+            print("\033[31mNessun gioco trovato dallo sviluppatore inserito\033[0m")
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per sviluppatore: \033[0m", err)
  
 def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
     try:
-        print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
         i = 0
         count = 0
+        trovato = False
         while count < len(catalogo):
             if anno_inizio <= catalogo[i]["anno"] <= anno_fine:
+                print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
                 print("-" * 57)
                 print(f"| {'TITOLO':<40} | {'ANNO':<10} |")
                 print("-" * 57)
+                trovato = True
                 break
             count+=1
         while i < len(catalogo):
@@ -144,20 +150,24 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
                 print(f"| {catalogo[i]['titolo']:<40} | {catalogo[i]['anno']:<10} |")
                 print("-" * 57)
             i += 1
+        if trovato == False:
+            print("\033[31mNessun gioco trovato nel periodo inserito\033[0m")
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
  
  
 def costo_gioco(catalogo, costo_min, costo_max):
         try:
-            print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
             i = 0
             count = 0
+            trovato = False
             while count < len(catalogo):
                 if costo_min <= catalogo[i]["costo"] <= costo_max:
+                    print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
                     print("-" * 57)
                     print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
                     print("-" * 57)
+                    trovato = True
                     break
                 count+=1
             while i < len(catalogo):
@@ -165,6 +175,8 @@ def costo_gioco(catalogo, costo_min, costo_max):
                     print(f"| {catalogo[i]['titolo']:<40} | {catalogo[i]['costo']:<10} |")
                     print("-" * 57)
                 i += 1
+            if trovato == False:
+                print("\033[31mNessun gioco trovato con il range di costo inserito\033[0m")
         except Exception as err:
             print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
  
@@ -172,11 +184,14 @@ def giochi_per_genere(catalogo, genere):
     try:
         i = 0
         count = 0
+        trovato = False
         while count < len(catalogo):
             if catalogo[count]["genere"].lower() == genere.lower():
+                print(f"Ecco l'elenco dei giochi del seguente genere: {genere}")
                 print("-" * 49)
                 print(f"| {'ID':<2} | {'TITOLO':<40} |")
                 print("-" * 49)
+                trovato = True
                 break
             count+=1
         while i < len(catalogo):
@@ -184,6 +199,8 @@ def giochi_per_genere(catalogo, genere):
                 print(f"| {i:<2} | {catalogo[i]['titolo']:<40} |")
                 print("-" * 49)
             i += 1
+        if trovato == False:
+            print("\033[31mNessun gioco del seguente genere trovato\033[0m")
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per genere: \033[0m", err)
  
@@ -244,7 +261,7 @@ def menu():
                 anno_fine = int(input("Inserisci l'anno di fine: "))
                 giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
             elif scelta == 8:
-                costo_min = int(input("Insersci il costo minimo del gioco: "))
+                costo_min = int(input("Inserisci il costo minimo del gioco: "))
                 costo_max = int(input("Inserisci il costo massimo del gioco: "))
                 costo_gioco(catalogo_giochi, costo_min, costo_max)
             elif scelta == 9:
