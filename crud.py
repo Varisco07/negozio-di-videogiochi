@@ -116,7 +116,7 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
         trovato = False
         while count < len(catalogo):
             if catalogo[count]["sviluppatore"].lower() == sviluppatore.lower():
-                print(f"Ecco l'elenco dei giochi svfiluppati da: {sviluppatore}")
+                print(f"Ecco l'elenco dei giochi sviluppati da: {sviluppatore}")
                 print("-" * 49)
                 print(f"| {'ID':<2} | {'TITOLO':<40} |")
                 print("-" * 49)
