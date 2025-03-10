@@ -64,11 +64,13 @@ def aggiungi_gioco(catalogo):
         sviluppatore = input("Inserisci il nome dello sviluppatore: ")
         anno = int(input("Inserisci l'anno di uscita: "))
         genere = input("Inserisci il genere: ")
+        costo = float(input("Inserisci il costo: "))
         catalogo.append({
             "titolo": titolo,
             "sviluppatore": sviluppatore,
             "anno": anno,
             "genere": genere,
+            "costo": costo
         })
         print("\033[32mGioco aggiunto con successo\033[0m")
     except Exception as err:
@@ -92,7 +94,7 @@ def modifica_gioco(catalogo):
         sviluppatore = input("Inserisci il nuovo sviluppatore: ")
         anno = int(input("Inserisci il nuovo anno di uscita: "))
         genere = input("Inserisci il nuovo genere: ")
-        costo = input("Inserisci il nuovo costo: ")
+        costo = float(input("Inserisci il nuovo costo: "))
  
         catalogo[scelta] = {
             "titolo": titolo,
@@ -261,17 +263,17 @@ def menu():
                 anno_fine = int(input("Inserisci l'anno di fine: "))
                 giochi_in_periodo(catalogo_giochi, anno_inizio, anno_fine)
             elif scelta == 8:
-                costo_min = int(input("Inserisci il costo minimo del gioco: "))
-                costo_max = int(input("Inserisci il costo massimo del gioco: "))
+                costo_min = float(input("Inserisci il costo minimo del gioco: "))
+                costo_max = float(input("Inserisci il costo massimo del gioco: "))
                 costo_gioco(catalogo_giochi, costo_min, costo_max)
             elif scelta == 9:
                 genere = input("Inserisci il genere di giochi che vuoi visualizzare: ")
                 giochi_per_genere(catalogo_giochi, genere)
             elif scelta == 10:
                 scrivi_file()
-                print("File scritto con successo")
+                print("\033[32mFile scritto con successo\033[0m")
             else:
-                print("\033[31mScelta non valida\033[0m")
+                print("\033[33mScelta non valida\033[0m")
         except Exception as err:
             print("\033[31mErrore: \033[0m", err)
         finally:
