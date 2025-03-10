@@ -113,15 +113,15 @@ def giochi_per_sviluppatore(catalogo, sviluppatore):
         i = 0
         count = 0
         while count < len(catalogo):
-            if catalogo[i]["sviluppatore"].lower() == sviluppatore.lower():
-                print("-" * 57)
-                print(f"| {'ID':<2} | {'SVILUPPATORE':<40} |")
-                print("-" * 57)
+            if catalogo[count]["sviluppatore"].lower() == sviluppatore.lower():
+                print("-" * 49)
+                print(f"| {'ID':<2} | {'TITOLO':<40} |")
+                print("-" * 49)
                 break
             count+=1
         while i < len(catalogo):
             if catalogo[i]["sviluppatore"].lower() == sviluppatore.lower():
-                print(f"| {i:<2} | {catalogo[i]['sviluppatore']:<40} |")
+                print(f"| {i:<2} | {catalogo[i]['titolo']:<40} |")
                 print("-" * 49)
             i += 1
     except Exception as err:
@@ -173,10 +173,10 @@ def giochi_per_genere(catalogo, genere):
         i = 0
         count = 0
         while count < len(catalogo):
-            if catalogo[i]["genere"].lower() == genere.lower():
-                print("-" * 57)
+            if catalogo[count]["genere"].lower() == genere.lower():
+                print("-" * 49)
                 print(f"| {'ID':<2} | {'TITOLO':<40} |")
-                print("-" * 57)
+                print("-" * 49)
                 break
             count+=1
         while i < len(catalogo):
