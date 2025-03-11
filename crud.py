@@ -88,8 +88,8 @@ def rimuovi_gioco(catalogo):
 def modifica_gioco(catalogo):
     try:
         stampa_catalogo(catalogo)
-        scelta = int(input("Inserisci il numero del gioco da modificare: "))
-        gioco = catalogo[scelta]
+        scelta_gioco = int(input("Inserisci il numero del gioco da modificare: "))
+        gioco = catalogo[scelta_gioco]
        
         while True:
             print("Quale campo vuoi modificare?  ")
@@ -127,8 +127,7 @@ def modifica_gioco(catalogo):
                 break
             else:
                 print("\033[31mCampo non valido. Riprova.\033[0m")
- 
-        catalogo[scelta] = gioco
+             
         print("\033[32mGioco modificato con successo\033[0m")
     except Exception as err:
         print("\033[31mErrore: \033[0m", err)
