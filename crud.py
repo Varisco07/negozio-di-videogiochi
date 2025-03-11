@@ -1,7 +1,6 @@
 import os
 import json
  
- 
 catalogo_giochi = []
  
 def leggi_file():
@@ -90,23 +89,49 @@ def modifica_gioco(catalogo):
     try:
         stampa_catalogo(catalogo)
         scelta = int(input("Inserisci il numero del gioco da modificare: "))
-        titolo = input("Inserisci il nuovo titolo: ")
-        sviluppatore = input("Inserisci il nuovo sviluppatore: ")
-        anno = int(input("Inserisci il nuovo anno di uscita: "))
-        genere = input("Inserisci il nuovo genere: ")
-        costo = float(input("Inserisci il nuovo costo: "))
+        gioco = catalogo[scelta]
+       
+        while True:
+            print("Quale campo vuoi modificare?  ")
+            print("+----------------------------+")
+            print("| 1  | TITOLO                |")
+            print("+----------------------------+")
+            print("| 2  | SVILUPPATORE          |")
+            print("+----------------------------+")
+            print("| 3  | ANNO DI USCITA        |")
+            print("+----------------------------+")
+            print("| 4  | GENERE                |")
+            print("+----------------------------+")
+            print("| 5  | COSTO                 |")
+            print("+----------------------------+")
+            print("| 6  | TERMINA MODIFICHE     |")
+            print("+----------------------------+")
+            scelta = int(input("Inserisci il numero del campo da modificare: "))
+           
+            if scelta == 1:
+                titolo = input("Inserisci il nuovo titolo: ")
+                gioco["titolo"] = titolo
+            elif scelta == 2:
+                sviluppatore = input("Inserisci il nuovo sviluppatore: ")
+                gioco["sviluppatore"] = sviluppatore
+            elif scelta == 3:
+                anno = int(input("Inserisci il nuovo anno di uscita: "))
+                gioco["anno"] = anno
+            elif scelta == 4:
+                genere = input("Inserisci il nuovo genere: ")
+                gioco["genere"] = genere
+            elif scelta == 5:
+                costo = float(input("Inserisci il nuovo costo: "))
+                gioco["costo"] = costo
+            elif scelta == 6:
+                break
+            else:
+                print("\033[31mCampo non valido. Riprova.\033[0m")
  
-        catalogo[scelta] = {
-            "titolo": titolo,
-            "sviluppatore": sviluppatore,
-            "anno": anno,
-            "genere": genere,
-            "costo": costo
-        }
+        catalogo[scelta] = gioco
         print("\033[32mGioco modificato con successo\033[0m")
     except Exception as err:
         print("\033[31mErrore: \033[0m", err)
- 
  
  
 def giochi_per_sviluppatore(catalogo, sviluppatore):
@@ -156,6 +181,30 @@ def giochi_in_periodo(catalogo, anno_inizio, anno_fine):
             print("\033[31mNessun gioco trovato nel periodo inserito\033[0m")
     except Exception as err:
         print("\033[31mErrore durante la ricerca dei giochi per periodo: \033[0m", err)
+ 
+ 
+def listino_prezzi_crescente(catalogo):
+    try:
+        n = len(catalogo)
+        i = 0
+        while i < n - 1:
+            count = 0
+            while count < n - 1 - i:
+                if catalogo[count]["costo"] > catalogo[count + 1]["costo"]:
+                    catalogo[count], catalogo[count + 1] = catalogo[count + 1], catalogo[count]
+                count += 1
+            i += 1
+ 
+        print("Ecco l'elenco dei costi in ordine crescente nel periodo scelto:")
+        print("-" * 57)
+        print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
+        print("-" * 57)
+       
+        for gioco in catalogo:
+            print(f"| {gioco['titolo']:<40} | {gioco['costo']:<10} |")
+            print("-" * 57)
+    except Exception as err:
+        print("\033[31mErrore: \033[0m", err)
  
  
 def costo_gioco(catalogo, costo_min, costo_max):
@@ -238,7 +287,9 @@ def menu():
             print("\033[34m+-------------------------------+\033[0m")
             print("\033[34m| \033[36m 9  | giochi per genere     \033[34m  |\033[0m")
             print("\033[34m+-------------------------------+\033[0m")
-            print("\033[34m| \033[36m 10 | aggiorna file        \033[34m   |\033[0m")
+            print("\033[34m| \033[36m 10 | listino prezzi       \033[34m   |\033[0m")
+            print("\033[34m+-------------------------------+\033[0m")
+            print("\033[34m| \033[36m 11 | aggiorna file        \033[34m   |\033[0m")
             print("\033[34m+-------------------------------+\033[0m")
            
             scelta = int(input("\033[36m--> \033[0m"))
@@ -270,6 +321,8 @@ def menu():
                 genere = input("Inserisci il genere di giochi che vuoi visualizzare: ")
                 giochi_per_genere(catalogo_giochi, genere)
             elif scelta == 10:
+                listino_prezzi_crescente(catalogo_giochi)
+            elif scelta == 11:
                 scrivi_file()
                 print("\033[32mFile scritto con successo\033[0m")
             else:
@@ -281,3 +334,4 @@ def menu():
             os.system("cls")
            
 menu()
+ 
