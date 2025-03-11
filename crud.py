@@ -28,22 +28,22 @@ def stampa_catalogo(catalogo):
         print("\033[31mErrore durante la stampa del catalogo: \033[0m", err)
  
  
-def stampa_gioco(gioco):
+def stampa_gioco(catalogo):
     try:
         stampa_catalogo(catalogo_giochi)
         numero = int(input("Inserisci il numero del gioco che vuoi vedere: "))
         print()
         print()
         print("-" * 59)
-        print(f'| TITOLO        | {catalogo_giochi[numero]["titolo"]:<40}|')
+        print(f'| TITOLO        | {catalogo[numero]["titolo"]:<40}|')
         print("-" * 59)
-        print(f'| SVILUPPATORE  | {catalogo_giochi[numero]["sviluppatore"]:<40}|')
+        print(f'| SVILUPPATORE  | {catalogo[numero]["sviluppatore"]:<40}|')
         print("-" * 59)
-        print(f'| ANNO          | {catalogo_giochi[numero]["anno"]:<40}|')
+        print(f'| ANNO          | {catalogo[numero]["anno"]:<40}|')
         print("-" * 59)
-        print(f'| GENERE        | {catalogo_giochi[numero]["genere"]:<40}|')
+        print(f'| GENERE        | {catalogo[numero]["genere"]:<40}|')
         print("-" * 59)
-        print(f'| COSTO         | {catalogo_giochi[numero]["costo"]:<40}|')
+        print(f'| COSTO         | {catalogo[numero]["costo"]:<40}|')
         print("-" * 59)
         print("\033[32mOperazione di visualizzazione gioco completata.\033[0m")
     except Exception as err:
