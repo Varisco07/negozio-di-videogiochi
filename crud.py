@@ -194,7 +194,7 @@ def listino_prezzi_crescente(catalogo):
                 count += 1
             i += 1
  
-        print("Ecco l'elenco dei costi in ordine crescente nel periodo scelto:")
+        print("Ecco l'elenco dei giochi in ordine per costo crescente:")
         print("-" * 57)
         print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
         print("-" * 57)
@@ -213,7 +213,7 @@ def costo_gioco(catalogo, costo_min, costo_max):
             trovato = False
             while count < len(catalogo):
                 if costo_min <= catalogo[i]["costo"] <= costo_max:
-                    print("Ecco l'elenco dei giochi usciti nel periodo scelto:")
+                    print("Ecco l'elenco dei giochi nel range di costo scelto:")
                     print("-" * 57)
                     print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
                     print("-" * 57)
