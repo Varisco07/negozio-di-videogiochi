@@ -1,2 +1,2 @@
-import crud.py as c
+import crud as c
 c.main()
