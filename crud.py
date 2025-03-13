@@ -212,7 +212,7 @@ def costo_gioco(catalogo, costo_min, costo_max):
             count = 0
             trovato = False
             while count < len(catalogo):
-                if costo_min <= catalogo[i]["costo"] <= costo_max:
+                if costo_min <= catalogo[count]["costo"] <= costo_max:
                     print("Ecco l'elenco dei giochi nel range di costo scelto:")
                     print("-" * 57)
                     print(f"| {'TITOLO':<40} | {'COSTO':<10} |")
